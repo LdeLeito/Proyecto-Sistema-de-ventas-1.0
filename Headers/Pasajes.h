@@ -1,5 +1,5 @@
-#ifndef PASAJES.H
-#define PASAJES .H
+#ifndef PASAJES_H
+#define PASAJES_H
 
 #define ID_MAX 2
 #define BUTACA_MAX 40
@@ -11,14 +11,12 @@
 
 struct Pasaje
 {
-    int id[BUTACA_MAX][ID_MAX];
-    int butaca[BUTACA_MAX];
+    int id;
+    int butaca;
     char destino[DESTINO_MAX];
     char fecha[Fecha_MAX];
     char horario[HORARIO_MAX];
-    char costo[COSTO_MAX];
-    int cantpasajero[PASAJERO_MAX];
-    int idpersona[PASAJERO_MAX];
+    float costo;
     char id_pasajero[IDPASAJERO_MAX]; // Relación con pasajero
 };
 void RegistrarPasaje(struct Pasaje *pasajes, int *cantidadpasajes);
