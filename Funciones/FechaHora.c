@@ -3,7 +3,8 @@
 #include "../Headers/Fecha.h"
 
 // Obtiene la fecha actual del sistema
-void ObtenerFechaActual(struct FechaHora *f) {
+void ObtenerFechaActual(struct FechaHora *f)
+{
     time_t t = time(NULL);
     struct tm *tm_info = localtime(&t);
 
@@ -13,7 +14,8 @@ void ObtenerFechaActual(struct FechaHora *f) {
 }
 
 // Obtiene la hora actual del sistema
-void ObtenerHoraActual(struct FechaHora *f) {
+void ObtenerHoraActual(struct FechaHora *f)
+{
     time_t t = time(NULL);
     struct tm *tm_info = localtime(&t);
 
@@ -22,13 +24,15 @@ void ObtenerHoraActual(struct FechaHora *f) {
 }
 
 // Muestra fecha y hora en pantalla
-void MostrarFechaHora(const struct FechaHora *f) {
+void MostrarFechaHora(const struct FechaHora *f)
+{
     printf("Fecha: %02d/%02d/%04d - Hora: %02d:%02d\n",
            f->dia, f->mes, f->anio, f->hora, f->minuto);
 }
 
 // Genera cadenas formateadas de fecha y hora (por ejemplo para guardar en structs o archivos)
-void FormatearFechaHora(const struct FechaHora *f, char *fechaStr, char *horaStr) {
+void FormatearFechaHora(const struct FechaHora *f, char *fechaStr, char *horaStr)
+{
     sprintf(fechaStr, "%02d/%02d/%04d", f->dia, f->mes, f->anio);
     sprintf(horaStr, "%02d:%02d", f->hora, f->minuto);
 }

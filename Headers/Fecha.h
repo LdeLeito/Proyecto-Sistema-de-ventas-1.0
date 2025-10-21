@@ -2,7 +2,8 @@
 #define FECHA_H
 
 // Estructura para almacenar fecha y hora
-struct FechaHora {
+struct FechaHora
+{
     int dia;
     int mes;
     int anio;

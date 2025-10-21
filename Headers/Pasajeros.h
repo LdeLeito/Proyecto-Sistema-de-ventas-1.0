@@ -12,7 +12,8 @@
 // Es decir podemos registrar hasta 99999 pasajeros
 #define IDPASAJERO_MAX 5
 
-struct Pasajero {
+struct Pasajero
+{
     char idpasajero[IDPASAJERO_MAX];
     char nombre[NOMBRE_MAX];
     char apellido[APELLIDO_MAX];
