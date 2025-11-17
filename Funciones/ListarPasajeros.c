@@ -16,7 +16,7 @@ void listarPasajeros(struct Pasajero *pasajero ,struct Pasaje *pasaje, struct Fe
             pasaje[i].butaca,
             Fecha[i].dia,
             Fecha[i].hora,
-            pasajero[i].nombreCompleto
+            pasajero[i].nombre, pasajero[i].apellido
         );
     }
 
