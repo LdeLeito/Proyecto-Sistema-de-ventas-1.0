@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#include "../Headers_h/Pasajeros.h"
-
+#include "../headers/Pasajeros.h"
+#include "../headers/Fecha.h"
 
 int main () {
     int opcion;
