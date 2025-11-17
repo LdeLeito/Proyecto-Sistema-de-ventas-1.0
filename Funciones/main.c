@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "../Cabeceras_h/Pasajeros.h"
+#include "../Headers_h/Pasajeros.h"
 
 
 int main () {
