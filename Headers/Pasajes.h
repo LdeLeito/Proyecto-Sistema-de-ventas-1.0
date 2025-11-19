@@ -17,6 +17,7 @@ struct Pasaje
     char fecha[Fecha_MAX];
     char horario[HORARIO_MAX];
     float costo;
+    char pasajeros[ PASAJERO_MAX];
     char id_pasajero[IDPASAJERO_MAX]; // Relación con pasajero
 };
 void RegistrarPasaje(struct Pasaje *pasajes, int *cantidadpasajes);
