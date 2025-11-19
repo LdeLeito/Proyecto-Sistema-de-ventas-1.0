@@ -24,5 +24,6 @@ struct Pasajero
 };
 
 void RegistrarPasajero(struct Pasajero *pasajeros, int *cantidadPasajeros);
+void GuardarPasajerosEnArchivo(const struct Pasajero *pasajeros, int cantidadPasajeros);
 void ListarPasajeros(const struct Pasajero *pasajeros, int cantidadPasajeros);
 #endif // PASAJEROS_H

@@ -20,4 +20,5 @@ struct Pasaje
     char id_pasajero[IDPASAJERO_MAX]; // Relación con pasajero
 };
 void RegistrarPasaje(struct Pasaje *pasajes, int *cantidadpasajes);
+void GuardarPasajesEnArchivo(const struct Pasaje *pasajes, int cantidadPasajes);
 #endif // PASAJES_H
