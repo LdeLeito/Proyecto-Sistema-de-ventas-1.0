@@ -4,27 +4,28 @@
 #include "../headers/Fecha.h"
 #include "../headers/pasajes.h"
 
+
 void GuardarPasajesEnArchivo(const struct Pasaje *pasajes, int cantidadPasajes)
 {
-    FILE *archivo = fopen("pasajes.txt", "w");
+    // Append para no sobrescribir
+    FILE *archivo = fopen("pasajes.txt", "a");
     if (archivo == NULL)
     {
         printf("Error al abrir el archivo.\n");
         return;
     }
 
-    for (int i = 0; i < cantidadPasajes; i++)
-    {
-        fprintf(archivo, "%d,%d,%s,%s,%s,%.2f,%s\n",
-                pasajes[i].id,
-                pasajes[i].butaca,
-                pasajes[i].destino,
-                pasajes[i].fecha,
-                pasajes[i].horario,
-                pasajes[i].costo,
-                pasajes[i].id_pasajero);
-    }
+    // Guardar solo el último pasaje registrado
+    const struct Pasaje *ultimo = &pasajes[cantidadPasajes - 1];
+    fprintf(archivo, "%d,%d,%s,%s,%s,%.2f,%s\n",
+            ultimo->id,
+            ultimo->butaca,
+            ultimo->destino,
+            ultimo->fecha,
+            ultimo->horario,
+            ultimo->costo,
+            ultimo->id_pasajero);
 
     fclose(archivo);
-    printf("Pasajes guardados exitosamente en 'pasajes.txt'.\n");
+    printf("Pasaje guardado exitosamente en 'pasajes.txt'.\n");
 }

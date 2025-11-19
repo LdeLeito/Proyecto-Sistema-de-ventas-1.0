@@ -1,7 +1,7 @@
 #ifndef PASAJES_H
 #define PASAJES_H
 
-#define ID_MAX 2
+#define ID_MAX 40
 #define BUTACA_MAX 40
 #define DESTINO_MAX 50
 #define Fecha_MAX 11
