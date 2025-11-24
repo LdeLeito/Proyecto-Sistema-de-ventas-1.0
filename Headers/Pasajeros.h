@@ -10,7 +10,7 @@
 #define DIR_MAX 100
 // Esto definirá la cantidad de pasajeros, usamos 5 digitos del 0 al 9.
 // Es decir podemos registrar hasta 99999 pasajeros
-#define IDPASAJERO_MAX 5
+#define IDPASAJERO_MAX 6 // 5 dígitos + '\0'
 
 struct Pasajero
 {

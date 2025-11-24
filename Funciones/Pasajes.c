@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "../headers/Pasajeros.h"
-#include "../headers/Fecha.h"
-#include "../headers/pasajes.h"
+#include "../Headers/Pasajeros.h"
+#include "../Headers/Fecha.h"
+#include "../Headers/Pasajes.h"
 
 
 void RegistrarPasaje(struct Pasaje *pasajes, int *cantidadpasajes)

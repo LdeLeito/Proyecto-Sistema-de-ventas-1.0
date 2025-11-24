@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "../headers/Pasajeros.h"
-#include "../headers/pasajes.h"
+#include "../Headers/Pasajeros.h"
+#include "../Headers/Pasajes.h"
 
 void ListarPasajesConPasajeros(struct Pasaje *pasajes, int cantidadPasajes, struct Pasajero *pasajeros, int cantidadPasajeros)
 {
@@ -31,3 +31,4 @@ void ListarPasajesConPasajeros(struct Pasaje *pasajes, int cantidadPasajes, stru
     }
 
     printf("+----+--------+------------+--------+------------------------------+\n");
+}

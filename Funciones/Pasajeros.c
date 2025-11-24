@@ -2,9 +2,9 @@
 #include <stdlib.h>
 // Usar rutas relativas al directorio headers para que el indexador de VS Code
 // (cpptools) y el compilador encuentren los archivos de cabecera. */
-#include "../headers/Pasajeros.h"
-#include "../headers/Fecha.h"
-#include "../headers/pasajes.h"
+#include "../Headers/Pasajeros.h"
+#include "../Headers/Fecha.h"
+#include "../Headers/Pasajes.h"
 
 void RegistrarPasajero(struct Pasajero *pasajeros, int *cantidadPasajeros)
 {
