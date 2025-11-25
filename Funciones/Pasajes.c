@@ -3,7 +3,6 @@
 #include "../Headers/Fecha.h"
 #include "../Headers/Pasajes.h"
 
-
 void RegistrarPasaje(struct Pasaje *pasajes, int *cantidadpasajes)
 {
     printf("---------------------------------------\n");
@@ -27,7 +26,8 @@ void RegistrarPasaje(struct Pasaje *pasajes, int *cantidadpasajes)
     nuevoPasaje.id = (*cantidadpasajes) + 1;
 
     // Validar butaca
-    do {
+    do
+    {
         printf("Ingrese el número de butaca (1-%d): ", BUTACA_MAX);
         LeerCadenaSeguro(nuevoPasaje.butaca, sizeof(nuevoPasaje.butaca));
         sscanf(nuevoPasaje.butaca, "%d", &nuevoPasaje.butaca);
