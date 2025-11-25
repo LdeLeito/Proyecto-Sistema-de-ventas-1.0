@@ -29,7 +29,8 @@ void RegistrarPasaje(struct Pasaje *pasajes, int *cantidadpasajes)
     // Validar butaca
     do {
         printf("Ingrese el número de butaca (1-%d): ", BUTACA_MAX);
-        scanf("%d", &nuevoPasaje.butaca);
+        LeerCadenaSeguro(nuevoPasaje.butaca, sizeof(nuevoPasaje.butaca));
+        sscanf(nuevoPasaje.butaca, "%d", &nuevoPasaje.butaca);
         if (nuevoPasaje.butaca < 1 || nuevoPasaje.butaca > BUTACA_MAX)
         {
             printf("Número de butaca inválido. Intente nuevamente.\n");
@@ -40,7 +41,7 @@ void RegistrarPasaje(struct Pasaje *pasajes, int *cantidadpasajes)
     scanf("%s", nuevoPasaje.destino);
 
     // Formatear fecha y hora
-    char fechaStr[Fecha_MAX], horaStr[HORARIO_MAX];
+    char fechaStr[FECHA_MAX], horaStr[HORARIO_MAX];
     FormatearFechaHora(&fechaHoraActual, fechaStr, horaStr);
     strcpy(nuevoPasaje.fecha, fechaStr);
     strcpy(nuevoPasaje.horario, horaStr);

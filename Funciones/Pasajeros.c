@@ -17,17 +17,17 @@ void RegistrarPasajero(struct Pasajero *pasajeros, int *cantidadPasajeros)
     printf("---------------------------------------\n");
     printf("----- Registro de Nuevo Pasajero -----\n");
     printf("Ingrese el nombre del pasajero: ");
-    scanf("%s", nuevoPasajero.nombre);
+    LeerCadenaSeguro(nuevoPasajero.nombre, NOMBRE_MAX);
     printf("Ingrese el apellido del pasajero: ");
-    scanf("%s", nuevoPasajero.apellido);
+    LeerCadenaSeguro(nuevoPasajero.apellido, APELLIDO_MAX);
     printf("Ingrese el DNI del pasajero: ");
-    scanf("%s", nuevoPasajero.dni);
+    LeerCadenaSeguro(nuevoPasajero.dni, DNI_MAX);
     printf("Ingrese email del pasajero: ");
-    scanf("%s", nuevoPasajero.email);
+    LeerCadenaSeguro(nuevoPasajero.email, EMAIL_MAX);
     printf("Ingrese el teléfono del pasajero: ");
-    scanf("%s", nuevoPasajero.telefono);
+    LeerCadenaSeguro(nuevoPasajero.telefono, TELEFONO_MAX);
     printf("Ingrese la dirección del pasajero: ");
-    scanf("%s", nuevoPasajero.direccion);
+    LeerCadenaSeguro(nuevoPasajero.direccion, DIR_MAX);
     printf("---------------------------------------\n");
 
     // Generar ID automático (ej: "00001", "00002", etc.)

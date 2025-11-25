@@ -19,8 +19,9 @@ int main(void)
         printf("-------------------------------\n");
         printf("1. Mostrar destinos disponibles\n");
         printf("2. Registrar nuevo pasajero\n");
-        printf("3. Generar reporte diario\n");
-        printf("4. Listado de pasajeros\n");
+        printf("3. Registrar pasaje en viaje\n");
+        printf("4. Generar reporte diario\n");
+        printf("5. Listado de pasajeros\n");
         printf("0. Salir\n");
         printf("Seleccione una opcion: ");
         scanf("%d", &opcion);
@@ -38,12 +39,15 @@ int main(void)
             RegistrarPasajero(Pasajero, &cantidadPasajeros);
             break;
         case 3:
+            printf("Registrando pasaje en viaje....\n");
+            RegistrarPasajeEnViaje(NULL, 0, Pasajero, cantidadPasajeros);
+        case 4:
             printf("Reporte diario....\n");
             // reporteDiario();
             break;
-        case 4:
+        case 5:
             printf("Listado de pasajeros....\n");
-            // listadoDePasajeros();
+            ListarPasajeros(Pasajero, cantidadPasajeros);
             break;
         case 0:
             printf("Saliendo del programa.\n");

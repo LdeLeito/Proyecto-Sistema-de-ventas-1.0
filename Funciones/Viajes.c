@@ -29,10 +29,10 @@ int CrearViaje(struct Viaje *viajes, int *cantidadViajes, const char *destino, c
     viajes[idx].id_viaje = idx + 1;
     strncpy(viajes[idx].destino, destino, DESTINO_MAX - 1);
     viajes[idx].destino[DESTINO_MAX - 1] = '\0';
-    strncpy(viajes[idx].fecha, fecha, FECHA_LEN - 1);
-    viajes[idx].fecha[FECHA_LEN - 1] = '\0';
-    strncpy(viajes[idx].horario, horario, HORARIO_LEN - 1);
-    viajes[idx].horario[HORARIO_LEN - 1] = '\0';
+    strncpy(viajes[idx].fecha, fecha, FECHA_MAX - 1);
+    viajes[idx].fecha[FECHA_MAX - 1] = '\0';
+    strncpy(viajes[idx].horario, horario, HORARIO_MAX - 1);
+    viajes[idx].horario[HORARIO_MAX - 1] = '\0';
     viajes[idx].cantidadPasajes = 0;
     (*cantidadViajes)++;
     return idx;
@@ -41,9 +41,9 @@ int CrearViaje(struct Viaje *viajes, int *cantidadViajes, const char *destino, c
 void RegistrarPasajeEnViaje(struct Viaje *viajes, int *cantidadViajes, struct Pasajero *pasajeros, int cantidadPasajeros)
 {
     char destino[DESTINO_MAX];
-    char fecha[FECHA_LEN];
-    char horario[HORARIO_LEN];
-    char idPasajero[IDPASAJERO_LEN];
+    char fecha[FECHA_MAX];
+    char horario[HORARIO_MAX];
+    char idPasajero[IDPASAJERO_MAX];
     float costo;
     int idxViaje;
 
@@ -56,9 +56,9 @@ void RegistrarPasajeEnViaje(struct Viaje *viajes, int *cantidadViajes, struct Pa
     }
 
     printf("Ingrese fecha (dd/mm/yyyy): ");
-    LeerCadenaSeguro(fecha, FECHA_LEN);
+    LeerCadenaSeguro(fecha, FECHA_MAX);
     printf("Ingrese horario (hh:mm): ");
-    LeerCadenaSeguro(horario, HORARIO_LEN);
+    LeerCadenaSeguro(horario, HORARIO_MAX);
 
     idxViaje = BuscarViajeCoincidente(viajes, *cantidadViajes, destino, fecha, horario);
     if (idxViaje >= 0)
@@ -105,15 +105,15 @@ void RegistrarPasajeEnViaje(struct Viaje *viajes, int *cantidadViajes, struct Pa
     // asignar butaca libre (ejemplo: secuencial)
     p->butaca = viajes[idxViaje].cantidadPasajes + 1;
     strncpy(p->destino, destino, DESTINO_MAX - 1);
-    strncpy(p->fecha, fecha, FECHA_LEN - 1);
-    strncpy(p->horario, horario, HORARIO_LEN - 1);
+    strncpy(p->fecha, fecha, FECHA_MAX - 1);
+    strncpy(p->horario, horario, HORARIO_MAX - 1);
     printf("Ingrese costo: ");
     char costoStr[20];
     LeerCadenaSeguro(costoStr, 20);
     p->costo = strtof(costoStr, NULL);
     printf("Ingrese ID del pasajero: ");
-    LeerCadenaSeguro(idPasajero, IDPASAJERO_LEN);
-    strncpy(p->id_pasajero, idPasajero, IDPASAJERO_LEN - 1);
+    LeerCadenaSeguro(idPasajero, IDPASAJERO_MAX);
+    strncpy(p->id_pasajero, idPasajero, IDPASAJERO_MAX - 1);
 
     viajes[idxViaje].cantidadPasajes++;
     printf("Pasaje registrado en viaje ID %d, butaca %d\n", viajes[idxViaje].id_viaje, p->butaca);
