@@ -5,6 +5,7 @@
 #include "../headers/Pasajeros.h"
 #include "../headers/Fecha.h"
 #include "../headers/Pasajes.h"
+#include "../Headers/Utiles.h"
 
 void RegistrarPasajero(struct Pasajero *pasajeros, int *cantidadPasajeros)
 {
