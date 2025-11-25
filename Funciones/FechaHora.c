@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <time.h>
-#include "../Headers/Fecha.h"
+#include "../headers/Fecha.h"
 
 // Obtiene la fecha actual del sistema
 void ObtenerFechaActual(struct FechaHora *f)

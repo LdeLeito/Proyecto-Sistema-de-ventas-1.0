@@ -6,8 +6,10 @@
 #include "../Headers/Pasajeros.h"
 #include "../Headers/Utiles.h"
 
-struct Pasajero Pasajero[100];
+struct Pasajero pasajero[100];
+struct Viaje viaje[VIAJES_MAX];
 int cantidadPasajeros = 0;
+int cantidadViajes = 0;
 int main(void)
 {
     int opcion;
@@ -36,18 +38,19 @@ int main(void)
             break;
         case 2:
             printf("Registrando pasajero.....\n");
-            RegistrarPasajero(Pasajero, &cantidadPasajeros);
+            RegistrarPasajero(pasajero, &cantidadPasajeros);
             break;
         case 3:
             printf("Registrando pasaje en viaje....\n");
-            RegistrarPasajeEnViaje(NULL, 0, Pasajero, cantidadPasajeros);
+            RegistrarPasajeEnViaje(viaje, &cantidadViajes, pasajero, cantidadPasajeros);
+            break;
         case 4:
             printf("Reporte diario....\n");
             // reporteDiario();
             break;
         case 5:
             printf("Listado de pasajeros....\n");
-            ListarPasajeros(Pasajero, cantidadPasajeros);
+            ListarPasajeros(pasajero, cantidadPasajeros);
             break;
         case 0:
             printf("Saliendo del programa.\n");

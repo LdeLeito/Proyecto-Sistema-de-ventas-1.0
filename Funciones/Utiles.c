@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdio.h>
-#include "../Headers/Utiles.h"
+#include "../headers/Utiles.h"
 void LeerCadenaSeguro(char *buffer, int len)
 {
     if (fgets(buffer, len, stdin) == NULL)

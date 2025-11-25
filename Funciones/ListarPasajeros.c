@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "../Headers/Pasajeros.h"
-#include "../Headers/Pasajes.h"
+#include "../headers/Pasajeros.h"
+#include "../headers/Pasajes.h"
 
 void ListarPasajesConPasajeros(struct Pasaje *pasajes, int cantidadPasajes, struct Pasajero *pasajeros, int cantidadPasajeros)
 {

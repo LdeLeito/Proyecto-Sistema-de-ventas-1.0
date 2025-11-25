@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../Headers/Pasajeros.h"
-#include "../Headers/Fecha.h"
-#include "../Headers/Pasajes.h"
+#include "../headers/Pasajeros.h"
+#include "../headers/Fecha.h"
+#include "../headers/Pasajes.h"
 
 
 void GuardarPasajesEnArchivo(const struct Pasaje *pasajes, int cantidadPasajes)

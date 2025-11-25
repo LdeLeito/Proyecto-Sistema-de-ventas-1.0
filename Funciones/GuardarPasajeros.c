@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../Headers/Pasajeros.h"
-#include "../Headers/Pasajes.h"
+#include "../headers/Pasajeros.h"
+#include "../headers/Pasajes.h"
 
 void GuardarPasajerosEnArchivo(const struct Pasajero *pasajeros, int cantidadPasajeros)
 {
