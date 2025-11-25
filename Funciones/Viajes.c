@@ -78,29 +78,39 @@ int AsignarPasajeAViaje(struct Viaje *v, const struct Pasaje *p, int butacaDesea
 /* Orquestador: pide datos, busca/crea viaje, asigna pasaje y guarda en CSV */
 void RegistrarPasajeEnViaje(struct Viaje *viajes, int *cantidadViajes, struct Pasajero *pasajeros, int cantidadPasajeros)
 {
+    // Evitar warnings
+    (void)cantidadPasajeros;
+
     char destino[DESTINO_MAX];
     char fecha[FECHA_MAX];
     char horario[HORARIO_MAX];
     char idPasajero[IDPASAJERO_MAX];
     char costoStr[32];
 
+    printf("----- Registro de Nuevo Pasaje -----\n");
+
+    // Leer destino y validar
     printf("Ingrese destino: ");
     LeerCadenaSeguro(destino, DESTINO_MAX);
     if (!ValidarDestino(destino))
     {
-        printf("Destino no disponible.\n");
+        printf("Destino no disponible. Operación cancelada.\n");
         return;
     }
 
+    // Leer fecha y horario (se puede mejorar validación de formato)
     printf("Ingrese fecha (dd/mm/yyyy): ");
     LeerCadenaSeguro(fecha, FECHA_MAX);
     printf("Ingrese horario (hh:mm): ");
     LeerCadenaSeguro(horario, HORARIO_MAX);
 
+    // Buscar viaje existente
     int idxViaje = BuscarViajeCoincidente(viajes, *cantidadViajes, destino, fecha, horario);
+
     if (idxViaje >= 0 && viajes[idxViaje].cantidadPasajes >= PASAJES_MAX)
     {
-        printf("El viaje está completo. Desea crear otro viaje con la misma ruta? (s/n): ");
+        printf("El viaje encontrado (ID %d) está completo.\n", viajes[idxViaje].id_viaje);
+        printf("Desea crear otro viaje con la misma ruta/fecha/horario? (s/n): ");
         char resp[4];
         LeerCadenaSeguro(resp, sizeof(resp));
         if (resp[0] == 's' || resp[0] == 'S')
@@ -108,7 +118,7 @@ void RegistrarPasajeEnViaje(struct Viaje *viajes, int *cantidadViajes, struct Pa
             int nuevoIdx = CrearViaje(viajes, cantidadViajes, destino, fecha, horario);
             if (nuevoIdx < 0)
             {
-                printf("No se pudo crear nuevo viaje.\n");
+                printf("No se pudo crear nuevo viaje. Operación cancelada.\n");
                 return;
             }
             idxViaje = nuevoIdx;
@@ -124,31 +134,42 @@ void RegistrarPasajeEnViaje(struct Viaje *viajes, int *cantidadViajes, struct Pa
         idxViaje = CrearViaje(viajes, cantidadViajes, destino, fecha, horario);
         if (idxViaje < 0)
         {
-            printf("No se pueden crear más viajes.\n");
+            printf("No se pueden crear más viajes. Operación cancelada.\n");
             return;
         }
     }
 
-    /* preparar pasaje */
+    // Preparar pasaje
     struct Pasaje nuevo;
     InicializarPasaje(&nuevo);
     nuevo.id = viajes[idxViaje].cantidadPasajes + 1;
     strncpy(nuevo.destino, destino, DESTINO_MAX - 1);
+    nuevo.destino[DESTINO_MAX - 1] = '\0';
     strncpy(nuevo.fecha, fecha, FECHA_MAX - 1);
+    nuevo.fecha[FECHA_MAX - 1] = '\0';
     strncpy(nuevo.horario, horario, HORARIO_MAX - 1);
+    nuevo.horario[HORARIO_MAX - 1] = '\0';
 
+    // Costo con verificación
     printf("Ingrese costo: ");
     LeerCadenaSeguro(costoStr, sizeof(costoStr));
-    nuevo.costo = strtof(costoStr, NULL);
+    char *endptr;
+    nuevo.costo = strtof(costoStr, &endptr);
+    if (endptr == costoStr || *endptr != '\0')
+    {
+        printf("Costo inválido. Operación cancelada.\n");
+        return;
+    }
 
-    /* elegir butaca: preguntar al usuario o asignar la primera libre */
+    // Buscar butaca libre y permitir elección
     int butacaLibre = BuscarButacaLibre(&viajes[idxViaje]);
     if (butacaLibre == -1)
     {
-        printf("Error: no hay butacas libres (esto no debería ocurrir aquí).\n");
+        printf("Error: no hay butacas libres en este viaje.\n");
         return;
     }
-    printf("Butaca sugerida: %d. Desea otra butaca? (ingrese número o 0 para aceptar sugerida): ", butacaLibre);
+
+    printf("Butaca sugerida: %d. Si desea otra, ingrese el número; ingrese 0 para aceptar la sugerida: ", butacaLibre);
     char butacaStr[8];
     LeerCadenaSeguro(butacaStr, sizeof(butacaStr));
     int butacaDeseada = atoi(butacaStr);
@@ -157,29 +178,58 @@ void RegistrarPasajeEnViaje(struct Viaje *viajes, int *cantidadViajes, struct Pa
 
     if (!ValidarButaca(butacaDeseada))
     {
-        printf("Butaca inválida.\n");
+        printf("Butaca inválida. Operación cancelada.\n");
         return;
     }
     if (viajes[idxViaje].asientos_ocupados[butacaDeseada])
     {
-        printf("Butaca ocupada. Asignando primera libre.\n");
+        printf("Butaca %d ya está ocupada. Se asignará la primera libre.\n", butacaDeseada);
         butacaDeseada = BuscarButacaLibre(&viajes[idxViaje]);
         if (butacaDeseada == -1)
         {
-            printf("No hay butacas libres.\n");
+            printf("No hay butacas libres. Operación cancelada.\n");
             return;
         }
     }
 
-    printf("Ingrese ID del pasajero: ");
+    // Leer y validar ID de pasajero: comprobar existencia en el arreglo
+    printf("Ingrese ID del pasajero (ej: 00001): ");
     LeerCadenaSeguro(idPasajero, IDPASAJERO_MAX);
-    strncpy(nuevo.id_pasajero, idPasajero, IDPASAJERO_MAX - 1);
+    idPasajero[IDPASAJERO_MAX - 1] = '\0';
+    int pasajeroEncontrado = 0;
+    for (int i = 0; i < cantidadPasajeros; ++i)
+    {
+        if (strcmp(pasajeros[i].idpasajero, idPasajero) == 0)
+        {
+            pasajeroEncontrado = 1;
+            // opcional: mostrar nombre completo
+            printf("Pasajero: %s %s\n", pasajeros[i].nombre, pasajeros[i].apellido);
+            break;
+        }
+    }
+    if (!pasajeroEncontrado)
+    {
+        printf("ID de pasajero no encontrado. Desea continuar y registrar el pasaje igual? (s/n): ");
+        char resp2[4];
+        LeerCadenaSeguro(resp2, sizeof(resp2));
+        if (!(resp2[0] == 's' || resp2[0] == 'S'))
+        {
+            printf("Operación cancelada.\n");
+            return;
+        }
+    }
 
+    strncpy(nuevo.id_pasajero, idPasajero, IDPASAJERO_MAX - 1);
+    nuevo.id_pasajero[IDPASAJERO_MAX - 1] = '\0';
+
+    // Intentar asignar
     int asign = AsignarPasajeAViaje(&viajes[idxViaje], &nuevo, butacaDeseada);
     if (asign == 1)
     {
-        printf("Pasaje registrado en viaje ID %d, butaca %d\n", viajes[idxViaje].id_viaje, butacaDeseada);
-        /* persistir todos los viajes (opción simple) */
+        printf("Pasaje registrado en viaje ID %d, butaca %d, pasaje ID %d\n",
+               viajes[idxViaje].id_viaje, butacaDeseada, nuevo.id);
+
+        // Persistencia: reescribir CSV completo (simple y consistente)
         if (!GuardarTodosLosViajesCSV(viajes, *cantidadViajes, "viajes_pasajes.csv"))
         {
             printf("Advertencia: no se pudo guardar en archivo.\n");
@@ -187,6 +237,14 @@ void RegistrarPasajeEnViaje(struct Viaje *viajes, int *cantidadViajes, struct Pa
     }
     else
     {
-        printf("No se pudo asignar el pasaje (código %d).\n", asign);
+        // Mensajes claros según código de retorno
+        if (asign == 0)
+            printf("No se pudo asignar el pasaje: viaje lleno.\n");
+        else if (asign == -1)
+            printf("No se pudo asignar el pasaje: butaca inválida.\n");
+        else if (asign == -2)
+            printf("No se pudo asignar el pasaje: butaca ocupada.\n");
+        else
+            printf("No se pudo asignar el pasaje (código %d).\n", asign);
     }
 }

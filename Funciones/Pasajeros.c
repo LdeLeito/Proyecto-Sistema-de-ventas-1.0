@@ -9,9 +9,9 @@
 
 void RegistrarPasajero(struct Pasajero *pasajeros, int *cantidadPasajeros)
 {
-    if (*cantidadPasajeros >= IDPASAJERO_MAX)
+    if (*cantidadPasajeros >= 99999)
     {
-        printf("No se pueden registrar más pasajeros. Límite alcanzado.\n");
+        printf("No se pueden registrar más pasajeros (límite 99999).\n");
         return;
     }
     struct Pasajero nuevoPasajero;
