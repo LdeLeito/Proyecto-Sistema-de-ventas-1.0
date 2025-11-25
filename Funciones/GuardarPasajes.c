@@ -7,7 +7,7 @@
 
 void GuardarPasajesEnArchivo(const struct Pasaje *pasajes, int cantidadPasajes)
 {
-    // Append para no sobrescribir
+    // Para no sobrescribir
     FILE *archivo = fopen("pasajes.txt", "a");
     if (archivo == NULL)
     {

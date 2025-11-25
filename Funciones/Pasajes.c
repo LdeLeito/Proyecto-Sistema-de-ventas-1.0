@@ -54,8 +54,8 @@ int GuardarPasajeEnArchivo(FILE *f, const struct Pasaje *p, int id_viaje)
     return 1;
 }
 
-/* Guarda todos los viajes y sus pasajes en un CSV (sobrescribe).
-   Retorna 1 en éxito, 0 en error. */
+//Guarda todos los viajes y sus pasajes en un CSV (sobrescribe).
+// Retorna 1 en éxito, 0 en error.
 int GuardarTodosLosViajesCSV(const struct Viaje *viajes, int cantidadViajes, const char *filename)
 {
     if (!viajes || !filename)
