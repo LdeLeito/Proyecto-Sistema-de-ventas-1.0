@@ -25,12 +25,12 @@ struct Pasaje
     char id_pasajero[IDPASAJERO_MAX];
 };
 
-/* Prototipos: las firmas deben coincidir exactamente con las definiciones en .c */
+// Funciones de manejo de pasajes
 void InicializarPasaje(struct Pasaje *p);
 int ValidarButaca(int butaca);
 void MostrarPasaje(const struct Pasaje *p);
 
-/* Persistencia: usar struct Viaje por puntero (forward declaration permite esto) */
+// Persistencia: usar struct Viaje por puntero
 int GuardarPasajeEnArchivo(FILE *f, const struct Pasaje *p, int id_viaje);
 int GuardarTodosLosViajesCSV(const struct Viaje *viajes, int cantidadViajes, const char *filename);
 int CargarViajesDesdeCSV(struct Viaje *viajes, int *cantidadViajes, const char *filename);
